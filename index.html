@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'><link rel="stylesheet" href="./style.css">
@@ -28,23 +29,8 @@ body {
   right: 0;
   left: 0;
   width: 430px;
-  height: 100px;
+  height: 120px;
   margin: -4px auto;
-}
-
-#player-bg-artwork {
-  position: fixed;
-  top: -30px;
-  right: -30px;
-  bottom: -30px;
-  left: -30px;
-  background-image: url("https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50%;
-  filter: blur(40px);
-  -webkit-filter: blur(40px);
-  z-index: 1;
 }
 
 #player-bg-layer {
@@ -77,7 +63,8 @@ body {
 }
 
 #player-track.active {
-  top: -92px;
+  top: -118px;
+  box-shadow: 0 30px 80px #656565;
 }
 
 #album-name {
@@ -222,6 +209,16 @@ body {
   opacity: 0;
   z-index: -1;
 }
+  
+
+#volume-slider 
+{
+  opacity: 0.5;
+  background-color: #ffb6c1;
+  filter: hue-rotate(120deg) sepia(20%) contrast(100%);
+  border-radius: 10px;
+}
+
 
 #album-art img.active {
   opacity: 1;
@@ -283,7 +280,7 @@ body {
 #player-controls {
   width: 250px;
   height: 100%;
-  margin: 0 5px 0 141px;
+  margin: 10px 5px 0 141px;
   float: right;
   overflow: hidden;
 }
@@ -305,7 +302,7 @@ body {
 
 .button i {
   display: block;
-  color: #d6dee7;
+  color: #ffb6c1;
   font-size: 26px;
   text-align: center;
   line-height: 1;
@@ -317,7 +314,7 @@ body {
 }
 
 .button:hover {
-  background-color: #d6d6de;
+  background-color: #ffb6c1;
 }
 
 .button:hover i {
@@ -332,6 +329,9 @@ body {
 <div id="player-container">
   <div id="player">
     <div id="player-track">
+      <div id="volume">
+        <input type="range" id="volume-slider">
+      </div>
       <div id="album-name"></div>
       <div id="track-name"></div>
       <div id="track-time">
@@ -379,6 +379,13 @@ body {
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
+  
+ $(function () {
+  let volume = document.getElementById('volume-slider');
+  volume.addEventListener("change", function(e) {
+      audio.volume = e.currentTarget.value / 100;
+  })})
+   
 $(function () {
   const playerTrack = $("#player-track");
   const bgArtwork = $("#player-bg-artwork");
@@ -399,7 +406,7 @@ $(function () {
     "ONLY",
     "Blueprint",
     "Off The Record",
-    "While You Were Sleeping",
+    "You Were Sleeping",
     "Paranoia"
   ];
   const trackNames = [
